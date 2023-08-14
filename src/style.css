@@ -1,0 +1,33 @@
+nav {
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid;
+    padding-bottom: 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.sideBar {
+    width: 15vw;
+    height: 80vh;
+    padding: 1.5rem;
+    border-right: 1px solid;
+    
+}
+
+button {
+    text-align: start;
+}
+
+.tasks {
+    width: 85vw;
+    height: 80vh;
+}
