@@ -42,19 +42,55 @@ function openModal() {
     modal.setAttribute("open", true);
 }
 
+
 //Add Task
-confirmButton.addEventListener("click", () => addTask())
+const title = document.querySelector("#Title")
+const description = document.querySelector("#Description")
+const dueDate = document.querySelector("#DueDate")
+const priority = document.querySelector("#Priority")
+const values = [title, description, dueDate, priority]
 
 function addTask() {
-    const title = document.querySelector("#Title")
-    const description = document.querySelector("#Description")
-    const dueDate = document.querySelector("#DueDate")
-    const priority = document.querySelector("#Priority")
+    formCheck()
+    if(modal.getAttribute("open") == "false") {
+        const penisNovo = new Task(title.value, description.value, dueDate.value, priority.value)
+        console.log(penisNovo)
+        console.log("AAAAAAAAAAAAAAA")
+        cleanInputs()
+    }
+    
+    
+}
 
-    const values = [title, description, dueDate, priority]
+function formCheck() {
+    let close = true
+    
+
+    
     values.forEach(element => {
         if(element.value == "") {
-            element.ariaInvalid = "true"
+            element.setAttribute("aria-invalid", true)
+            close = false
+        } else {
+            element.setAttribute("aria-invalid", false)
         }
     });
+    if (close) {
+        closeModal()
+        
+    }
+   
+
 }
+function cleanInputs() {
+    values.forEach(element => {
+        element.value = ""
+        element.setAttribute("aria-invalid", undefined)
+    });
+    close = true
+
+}
+
+
+confirmButton.addEventListener("click", () => addTask())
+
