@@ -1,5 +1,6 @@
 import './style.scss'
 
+//Theme Switcher
 const themeSwitcher = document.querySelector("input")
 const modal = document.querySelector("dialog")
 const cancelButton = document.querySelector("#cancel")
@@ -50,15 +51,23 @@ const dueDate = document.querySelector("#DueDate")
 const priority = document.querySelector("#Priority")
 const values = [title, description, dueDate, priority]
 
+let existingTasks = {}
+
+const taskBar = document.querySelector(".tasks")
+
 function addTask() {
     formCheck()
     if(modal.getAttribute("open") == "false") {
-        const penisNovo = new Task(title.value, description.value, dueDate.value, priority.value)
-        console.log(penisNovo)
-        console.log("AAAAAAAAAAAAAAA")
+        existingTasks[title.value] = new Task(title.value, description.value, dueDate.value, priority.value)
+        
+        let newTask = document.createElement("button")
+        newTask.innerText = title.value
+        newTask.classList.add("task")
+        taskBar.appendChild(newTask)
         cleanInputs()
     }
     
+
     
 }
 
