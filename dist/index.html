@@ -25,10 +25,10 @@
             <button class="task">DAIWDUWAIIDUWA</button>
         </div>
     </main>
-    <dialog id="modal-example">
+    <dialog id="modal-example" class="addTaskModal">
         <article>
             <header>
-                <a href="#close" aria-label="Close" class="close"></a>
+                <a href="#close" aria-label="Close" class="close closeModal"></a>
                 <h3>Add a Task</h3>
             </header>
             <form action="">
@@ -58,8 +58,26 @@
                 </div>
             </form>
             <footer>
-                <a href="#cancel" role="button" class="secondary" data-target="modal-example" id="cancel">Cancel</a>
+                <a href="#cancel" role="button" class="secondary closeModal" data-target="modal-example" id="cancel" close="closeModal">Cancel</a>
                 <a href="#confirm" role="button" id="confirm">Confirm</a>
+            </footer>
+        </article>
+    </dialog>
+    <dialog id="modal-example" class="showTaskModal">
+        <article>
+            <header>
+                <a href="#close" aria-label="Close" class="close closeModal bottomModal"></a>
+                <h3>Task Details</h3>
+            </header>
+            <div class="info">
+                <p>Task Name:</p>
+                <p>Description</p>
+                <p>DueDate:</p>
+                <p>Priority:</p>
+            </div>
+            
+            <footer>
+                <a href="#cancel" role="button" class="secondary closeModal bottomModal" data-target="modal-example" id="cancel">Close</a>
             </footer>
         </article>
     </dialog>

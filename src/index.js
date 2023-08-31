@@ -2,9 +2,8 @@ import './style.scss'
 
 //Theme Switcher
 const themeSwitcher = document.querySelector("input")
-const modal = document.querySelector("dialog")
-const cancelButton = document.querySelector("#cancel")
-const closeButton = document.querySelector(".close")
+const addTaskModal = document.querySelector(".addTaskModal")
+
 const addTaskButton = document.querySelector("#addTask")
 const confirmButton = document.querySelector("#confirm")
 
@@ -30,41 +29,63 @@ function Task(title, description, dueDate, priority) {
 
 
 //Toggle Modal
-closeButton.addEventListener("click",  () => closeModal())
-cancelButton.addEventListener("click",  () => closeModal())
-addTaskButton.addEventListener("click",  () => openModal())
+const closeButtons = Array.from(document.querySelectorAll(".closeModal"))
+
+closeButtons.forEach(element => {
+    if(element.classList.contains("bottomModal")) {
+        element.addEventListener("click",  () => closeModal(showTaskModal))
+    } else {
+        element.addEventListener("click",  () => closeModal(addTaskModal))
+    }
+    
+});
+
+addTaskButton.addEventListener("click",  () => openModal(addTaskModal))
 
 
-function closeModal() {
+function closeModal(modal) {
     modal.setAttribute("open", false);
 }
 
-function openModal() {
+function openModal(modal) {
     modal.setAttribute("open", true);
 }
 
 
 //Add Task
+
+//Task Data
 const title = document.querySelector("#Title")
 const description = document.querySelector("#Description")
 const dueDate = document.querySelector("#DueDate")
 const priority = document.querySelector("#Priority")
 const values = [title, description, dueDate, priority]
 
-let existingTasks = {}
-
+//Task Items
 const taskBar = document.querySelector(".tasks")
+let existingTasks = {}
+let close = true
+
+//showTask Modal
+const showTaskModal = document.querySelector(".showTaskModal")
+const taskModalInfo = document.querySelector(".info")
+
+
 
 function addTask() {
     formCheck()
-    if(modal.getAttribute("open") == "false") {
+    if(addTaskModal.getAttribute("open") == "false") {
         existingTasks[title.value] = new Task(title.value, description.value, dueDate.value, priority.value)
-        
+        console.log(existingTasks)
+        let titleText = title.value
         let newTask = document.createElement("button")
         newTask.innerText = title.value
+
         newTask.classList.add("task")
+        newTask.addEventListener("click", () => showTaskInfo(existingTasks[titleText]))
         taskBar.appendChild(newTask)
         cleanInputs()
+        
     }
     
 
@@ -72,7 +93,7 @@ function addTask() {
 }
 
 function formCheck() {
-    let close = true
+    
     
 
     
@@ -85,10 +106,16 @@ function formCheck() {
         }
     });
     if (close) {
-        closeModal()
+        closeModal(addTaskModal)
         
     }
    
+
+}
+
+function showTaskInfo(info) {
+    taskModalInfo.innerHTML = `<p>Title: ${info.title}</p> <p>Description: ${info.description}</p> <p>DueDate: ${info.dueDate}</p> <p>Priority: ${info.priority}</p>`
+    openModal(showTaskModal)
 
 }
 function cleanInputs() {
@@ -102,4 +129,7 @@ function cleanInputs() {
 
 
 confirmButton.addEventListener("click", () => addTask())
+
+
+
 
