@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <nav>
+        <h1>Todo List</h1>
+        <input type="checkbox" id="switch" name="switch" role="switch" >
+    </nav>
+    <div class="main">
+        <div class="sideBar">
+            <div>All Tasks</div>
+            <div>Today</div>
+            <div>This Week</div>
+        </div>
+        <div class="tasks">
+            <div>
+                <h3>Tasks</h3>
+                <a href="#add" role="button" class="secondary" id="addTask">+</a>
+            </div>
+            <button class="task">DAIWDUWAIIDUWA</button>
+        </div>
+    </main>
+    <dialog id="modal-example">
+        <article>
+            <header>
+                <a href="#close" aria-label="Close" class="close"></a>
+                <h3>Add a Task</h3>
+            </header>
+            <form action="">
+                <div class="grid">
+                    <label for="Title">
+                        Title
+                        <input type="text" name="" id="Title">
+                    </label>
+                    <label for="Description">
+                        Description
+                        <input type="text" name="" id="Description">
+                    </label>
+                </div>
+                <div class="grid">
+                    <label for="DueDate">
+                        DueDate
+                        <input type="date" name="" id="DueDate">
+                    </label>
+                    <label for="Priority">
+                        Priority
+                        <select name="Priority" id="Priority">
+                            <option value="Low">Low</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </label>
+                </div>
+            </form>
+            <footer>
+                <a href="#cancel" role="button" class="secondary" data-target="modal-example" id="cancel">Cancel</a>
+                <a href="#confirm" role="button" id="confirm">Confirm</a>
+            </footer>
+        </article>
+    </dialog>
+    
+</body>
+</html>
