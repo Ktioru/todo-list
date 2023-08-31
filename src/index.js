@@ -72,17 +72,29 @@ const taskModalInfo = document.querySelector(".info")
 
 
 
+
 function addTask() {
     formCheck()
     if(addTaskModal.getAttribute("open") == "false") {
         existingTasks[title.value] = new Task(title.value, description.value, dueDate.value, priority.value)
-        console.log(existingTasks)
         let titleText = title.value
-        let newTask = document.createElement("button")
-        newTask.innerText = title.value
 
-        newTask.classList.add("task")
+        let newTask = document.createElement("button")
         newTask.addEventListener("click", () => showTaskInfo(existingTasks[titleText]))
+
+        let taskTitle = document.createElement("p")
+        newTask.classList.add("task")
+        taskTitle.innerText = title.value
+
+        let deleteTaskButton = document.createElement("strong")
+        deleteTaskButton.innerText = "x"
+        deleteTaskButton.addEventListener("click", () => deleteTask(titleText))
+
+        
+
+        
+        newTask.appendChild(taskTitle)
+        newTask.appendChild(deleteTaskButton)
         taskBar.appendChild(newTask)
         cleanInputs()
         
@@ -127,9 +139,24 @@ function cleanInputs() {
 
 }
 
+function deleteTask(deletedTask) {
+    let objectValues = Object.values(existingTasks)
+    objectValues.forEach(element => {
+        
+        if(element.title == deletedTask) {
+            console.log("AADENTROU MAIS DELICIA AIDNDA")
+            delete existingTasks[deletedTask]
+            
+        }
+    });
+    let domTasks = document.querySelectorAll("button")
+    Array.from(domTasks).forEach(element => {
+        if(element.getElementsByTagName("p")[0].innerText == deletedTask) {
+            taskBar.removeChild(element)
+
+        }
+    });
+}
+
 
 confirmButton.addEventListener("click", () => addTask())
-
-
-
-
