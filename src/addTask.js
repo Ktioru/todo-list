@@ -14,6 +14,7 @@ const taskModalInfo = document.querySelector('.info');
 
 const confirmButton = document.querySelector('#confirm');
 
+addTaskModal.setAttribute('open', false);
 function closeModal(modal) {
   modal.setAttribute('open', false);
 }
@@ -72,23 +73,29 @@ function deleteTask(deletedTask) {
   });
 }
 
-function addTask() {
-  formCheck();
+function addToLocalStorage(element) {
+  const todos = JSON.parse(localStorage.getItem('todos'));
+  todos[element.title] = element;
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function addTask(titl = title.value, descriptio = description.value, dueDat = dueDate.value, priorit = priority.value) {
   if (addTaskModal.getAttribute('open') === 'false') {
-    existingTasks[title.value] = new Task(
-      title.value,
-      description.value,
-      dueDate.value,
-      priority.value,
+    console.log('im open');
+    existingTasks[titl] = new Task(
+      titl,
+      descriptio,
+      dueDat,
+      priorit,
     );
-    const titleText = title.value;
+    const titleText = titl;
 
     const newTask = document.createElement('button');
     newTask.addEventListener('click', () => showTaskInfo(existingTasks[titleText]));
 
     const taskTitle = document.createElement('p');
     newTask.classList.add('task');
-    taskTitle.innerText = title.value;
+    taskTitle.innerText = titl;
 
     const deleteTaskButton = document.createElement('strong');
     deleteTaskButton.innerText = 'x';
@@ -97,10 +104,25 @@ function addTask() {
     newTask.appendChild(taskTitle);
     newTask.appendChild(deleteTaskButton);
     taskBar.appendChild(newTask);
-
-    localStorage.setItem(titleText, newTask);
-    cleanInputs();
+    return existingTasks[titl];
   }
 }
 
-confirmButton.addEventListener('click', () => addTask());
+function confirm() {
+  formCheck();
+  const todo = addTask();
+  addToLocalStorage(todo);
+  cleanInputs();
+}
+
+function addStorageTodos() {
+  const todos = JSON.parse(localStorage.getItem('todos'));
+  Object.values(todos).forEach((object) => {
+    console.log(object);
+    addTask(object.title, object.description, object.dueDate, object.priority);
+  });
+}
+
+addStorageTodos();
+
+confirmButton.addEventListener('click', () => confirm());

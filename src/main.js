@@ -1,15 +1,7 @@
 import './style.scss';
 
-const addTaskModal = document.querySelector('.addTaskModal');
-const showTaskModal = document.querySelector('.showTaskModal');
-
-function closeModal(modal) {
-  modal.setAttribute('open', false);
-}
-
-function openModal(modal) {
-  modal.setAttribute('open', true);
-}
+const taskBar = document.querySelector('.tasks');
+const themeSwitcher = document.querySelector('input');
 
 function changeTheme() {
   if (document.querySelector('html').dataset.theme === 'dark') {
@@ -20,18 +12,5 @@ function changeTheme() {
 }
 
 // Theme Switcher
-const themeSwitcher = document.querySelector('input');
 
 themeSwitcher.addEventListener('click', () => changeTheme());
-
-// Create tasks
-
-// Toggle Modal
-
-// Add Task
-
-// Task Data
-
-// Task Items
-
-// showTask Modal
